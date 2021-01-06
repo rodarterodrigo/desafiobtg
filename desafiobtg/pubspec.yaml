@@ -21,6 +21,14 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  rflutter_alert:
+  fluttertoast:
+  path_provider:
+  sqflite:
+  rxdart:
+  flutter_modular:
+  dio:
+  dartz:
   flutter:
     sdk: flutter
 
