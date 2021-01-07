@@ -1,4 +1,5 @@
 import 'package:desafiobtg/modules/convert/domain/entities/convert.dart';
+import 'package:desafiobtg/modules/convert/infra/models/currency_model.dart';
 
 class ConvertModel extends Convert{
 
@@ -9,5 +10,5 @@ class ConvertModel extends Convert{
     return '{ ${this.from}, ${this.to} }';
   }
 
-  static ConvertModel toCurrency(Map<String, dynamic> map) => map == null? null: ConvertModel(from: map.keys.first, to: map.values.first);
+  static ConvertModel toConvert(Map<String, dynamic> map) => map == null? null: ConvertModel(from: map.values.first, to: map.values.last);
 }
