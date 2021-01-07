@@ -5,6 +5,9 @@ import 'package:desafiobtg/modules/convert/infra/repositories/list_currency_repo
 import 'package:dio/dio.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'convert/domain/usecases/convert_currency.dart';
+import 'convert/external/datasources/convert_currency_datasource.dart';
+import 'convert/infra/repositories/convert_currency_repository_impl.dart';
 
 class AppModule extends MainModule{
   @override
@@ -14,6 +17,9 @@ class AppModule extends MainModule{
     Bind((i) => ListCurrencyDatasource(i())),
     Bind((i) => ListCurrencyRepository(i())),
     Bind((i) => ListCurrency(i())),
+    Bind((i) => ConvertCurrencyDatasource(i())),
+    Bind((i) => ConvertCurrencyRepository(i())),
+    Bind((i) => ConvertCurrency(i())),
   ];
 
   @override

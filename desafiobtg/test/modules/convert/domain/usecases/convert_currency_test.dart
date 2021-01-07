@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:desafiobtg/modules/convert/domain/entities/convert.dart';
 import 'package:desafiobtg/modules/convert/domain/errors/errors.dart';
 import 'package:desafiobtg/modules/convert/domain/repositories/convert_currency_repository.dart';
-import 'package:desafiobtg/modules/convert/domain/usecases/convert_current.dart';
+import 'package:desafiobtg/modules/convert/domain/usecases/convert_currency.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
