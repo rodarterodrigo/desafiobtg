@@ -24,8 +24,26 @@ main(){
   });
 
   test("Deve retornar uma exceção do tipo DataSourceError", () async{
-    when(repository.convertCurrency(any, any)).thenThrow(DataSourceError());
+    when(datasource.convertCurrency(any, any)).thenThrow(DataSourceError());
     final result = await repository.convertCurrency(from, to);
+    expect(result.fold(id,id), isA<DataSourceError>());
+  });
+
+  test("Deve retornar uma exceção do tipo DataSourceError", () async{
+    when(datasource.convertCurrency(any, any)).thenAnswer((realInvocation) async => ConvertModel());
+    final result = await repository.convertCurrency(null, to);
+    expect(result.fold(id,id), isA<DataSourceError>());
+  });
+
+  test("Deve retornar uma exceção do tipo DataSourceError", () async{
+    when(datasource.convertCurrency(any, any)).thenAnswer((realInvocation) async => ConvertModel());
+    final result = await repository.convertCurrency(from, null);
+    expect(result.fold(id,id), isA<DataSourceError>());
+  });
+
+  test("Deve retornar uma exceção do tipo DataSourceError", () async{
+    when(datasource.convertCurrency(any, any)).thenAnswer((realInvocation) async => ConvertModel());
+    final result = await repository.convertCurrency(null, null);
     expect(result.fold(id,id), isA<DataSourceError>());
   });
 }

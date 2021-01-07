@@ -13,7 +13,9 @@ class ConvertCurrencyRepository implements IConvertCurrencyRepository{
   @override
   Future<Either<FailureCurrency, Convert>> convertCurrency(Currency from, Currency to) async {
     try{
-      return Right(await dataSource.convertCurrency(from, to));
+      return from == null? Left(DataSourceError(message: "A moeda de origem não pode ser nula.")): to == null?
+                           Left(DataSourceError(message: "A moeda de destino não pode ser nula.")):
+                           Right(await dataSource.convertCurrency(from, to));
     }
     on DataSourceError catch(Exception){
     return Left(Exception);

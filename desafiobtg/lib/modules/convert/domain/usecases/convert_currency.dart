@@ -16,7 +16,9 @@ class ConvertCurrency implements IConvertCurrency{
   @override
   Future<Either<FailureCurrency, Convert>> convertCurrency(Currency from, Currency to) async{
     try {
-      return await repository.convertCurrency(from, to);
+      return from == null? Left(ConvertError(message: "Moeda de origem não pode ser nula.")): to == null?
+                           Left(ConvertError(message: "Moeda de destino não pode ser nula.")):
+                           await repository.convertCurrency(from, to);
     }
     catch(e){
       return Left(ConvertError(message: e.toString()));

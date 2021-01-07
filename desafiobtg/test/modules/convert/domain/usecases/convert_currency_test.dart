@@ -23,6 +23,24 @@ main(){
   });
 
   test("Deve retornar uma exceção do tipo ConvertError", () async{
+    when(repository.convertCurrency(any, any)).thenAnswer((realInvocation) async => Right(Convert()));
+    final result = await usecase.convertCurrency(null, to);
+    expect(result.fold(id,id), isA<ConvertError>());
+  });
+
+  test("Deve retornar uma exceção do tipo ConvertError", () async{
+    when(repository.convertCurrency(any, any)).thenAnswer((realInvocation) async => Right(Convert()));
+    final result = await usecase.convertCurrency(from, null);
+    expect(result.fold(id,id), isA<ConvertError>());
+  });
+
+  test("Deve retornar uma exceção do tipo ConvertError", () async{
+    when(repository.convertCurrency(any, any)).thenAnswer((realInvocation) async => Right(Convert()));
+    final result = await usecase.convertCurrency(null, null);
+    expect(result.fold(id,id), isA<ConvertError>());
+  });
+
+  test("Deve retornar uma exceção do tipo ConvertError", () async{
     when(repository.convertCurrency(any, any)).thenThrow(ConvertError());
     final result = await usecase.convertCurrency(from, to);
     expect(result.fold(id,id), isA<ConvertError>());
