@@ -2,12 +2,12 @@ import 'package:desafiobtg/modules/convert/domain/entities/currency.dart';
 
 class CurrencyModel extends Currency{
 
-  CurrencyModel({name, country}):super(name: name, country: country);
+  CurrencyModel({currency, name}):super(currency: currency, name: name);
 
   @override
   String toString(){
-    return '{ ${this.name}, ${this.country} }';
+    return '{ ${this.currency}, ${this.name} }';
   }
 
-  static List<CurrencyModel> toList(Map<String, dynamic> map) => map == null? null: map.entries.map((e) => CurrencyModel(name: e.key, country: e.value)).toList();
+  static List<CurrencyModel> toList(Map<String, dynamic> map) => map == null? null: map.entries.map((e) => CurrencyModel(currency: e.key, name: e.value)).toList();
 }

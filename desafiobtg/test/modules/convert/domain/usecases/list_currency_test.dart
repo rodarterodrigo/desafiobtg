@@ -6,7 +6,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:dartz/dartz.dart';
 
-import '';
 class ListCurrencyRepositoryMock extends Mock implements IListCurrencyRepository{}
 
 final repository = ListCurrencyRepositoryMock();

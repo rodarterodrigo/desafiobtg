@@ -26,3 +26,16 @@ class DataSourceError implements FailureCurrency{
     return "DataSourceError: $message";
   }
 }
+
+class ConvertError implements FailureCurrency {
+  @override
+  final dynamic message;
+
+  ConvertError({this.message});
+
+  String toString() {
+    Object message = this.message;
+    if (message == null) return "ConvertError";
+    return "ConvertError: $message";
+  }
+}

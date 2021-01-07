@@ -1,7 +1,7 @@
 class Currency{
 
+  final String currency;
   final String name;
-  final String country;
 
-  Currency({this.name, this.country});
+  Currency({this.currency, this.name});
 }
