@@ -9,17 +9,5 @@ class CurrencyModel extends Currency{
     return '{ ${this.name}, ${this.country} }';
   }
 
-  Map<String, dynamic> toMap(){
-    return{
-      "name":name,
-      "country":country,
-    };
-  }
-
-  static List<CurrencyModel> toList(Map<String, dynamic> map){
-    List<CurrencyModel> list = new List<CurrencyModel>();
-    if(map == null) return null;
-    map.forEach((key, value) => list.add(CurrencyModel(name: key, country: value)));
-    return list;
-  }
+  static List<CurrencyModel> toList(Map<String, dynamic> map) => map == null? null: map.entries.map((e) => CurrencyModel(name: e.key, country: e.value)).toList();
 }
