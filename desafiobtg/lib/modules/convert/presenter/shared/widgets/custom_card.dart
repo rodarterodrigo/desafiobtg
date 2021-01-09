@@ -2,12 +2,10 @@ import 'package:desafiobtg/modules/convert/domain/entities/currency.dart';
 import 'package:flutter/material.dart';
 
 class CurrencyCard extends StatefulWidget {
-  CurrencyCard({@required this.currency, @required this.onTap, @required this.isTaped, this.target});
+  CurrencyCard({@required this.currency, @required this.onTap});
 
   final Currency currency;
   final GestureTapCallback onTap;
-  final isTaped;
-  final String target;
 
   @override
   _CurrencyCardState createState() => _CurrencyCardState();
