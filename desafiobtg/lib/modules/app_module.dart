@@ -4,6 +4,7 @@ import 'package:desafiobtg/modules/convert/external/datasources/list_currency_da
 import 'package:desafiobtg/modules/convert/infra/repositories/list_currency_repository_impl.dart';
 import 'package:desafiobtg/modules/convert/presenter/routes/app_routes.dart';
 import 'package:desafiobtg/modules/convert/presenter/views/home_view.dart';
+import 'package:desafiobtg/modules/convert/presenter/views/list_page.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -32,5 +33,6 @@ class AppModule extends MainModule{
   // TODO: implement routers
   List<ModularRouter> get routers => [
     ModularRouter(Routes.HOME, child: (context, args) => Home(), transition: TransitionType.leftToRight),
+    ModularRouter(Routes.LISTCURRENCY, child: (context, args) => ListPage(target: args.data,), transition: TransitionType.rightToLeft),
   ];
 }

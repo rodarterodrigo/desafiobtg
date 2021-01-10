@@ -26,7 +26,7 @@ class _CurrencyCardState extends State<CurrencyCard> {
               border: Border.all( color: Colors.teal, width: 2, style: BorderStyle.solid),
               color: widget.currency.isTaped? Colors.teal: Colors.white,
               // color: Colors.white,
-              borderRadius: BorderRadius.all(Radius.circular(5)),
+              borderRadius: BorderRadius.all(Radius.circular(4)),
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,

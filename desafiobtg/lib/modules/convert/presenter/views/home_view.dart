@@ -1,15 +1,21 @@
+
 import 'package:desafiobtg/modules/convert/domain/entities/currency.dart';
+import 'package:desafiobtg/modules/convert/presenter/controllers/convert_currency_controller.dart';
 import 'package:desafiobtg/modules/convert/presenter/controllers/list_currency_controller.dart';
-import 'package:desafiobtg/modules/convert/presenter/shared/widgets/custom_card.dart';
-import 'package:desafiobtg/modules/convert/presenter/shared/widgets/custom_textfield.dart';
+import 'package:desafiobtg/modules/convert/presenter/routes/app_routes.dart';
+import 'package:desafiobtg/modules/convert/presenter/shared/enums/buttom_style.dart';
+import 'package:desafiobtg/modules/convert/presenter/shared/widgets/custom_buttom.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:provider/provider.dart';
+
 
 class Home extends StatefulWidget {
   final Currency from;
   final Currency to;
+  final String target;
 
-  Home({this.from, this.to});
+  Home({this.from, this.to, this.target});
 
   @override
   _HomeState createState() => _HomeState();
@@ -20,65 +26,45 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     ListCurrencyController listCurrencyController = Provider.of<ListCurrencyController>(context);
+    ConvertCurrencyController convertCurrencyController = Provider.of<ConvertCurrencyController>(context);
     listCurrencyController.getListCurrency();
     return SafeArea(
         child: Scaffold(
           appBar: AppBar(
-            title: Text("Currency List"),
+            title: Text("Currency Convert"),
             centerTitle: true,
           ),
           body: SingleChildScrollView(
-            child: Container(
-              child: Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.all(10),
-                    child: CustomTextField(
-                      clearTap: () => listCurrencyController.clear(searchController),
-                      controller: searchController,
-                      onChanged: (search) => listCurrencyController.searchCurrency(search),
-                      borderColor: Colors.teal,
-                      labelText: "Buscar por sigla",
+            child: Center(
+              child: Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          CustomButton(
+                            onPressed: () async { Modular.to.pushNamed(Routes.LISTCURRENCY, arguments: "from");
+                            listCurrencyController.clearList(); listCurrencyController.getListCurrency(); },
+                            text: convertCurrencyController.from.currency != null?
+                                  convertCurrencyController.from.currency.toString():
+                                  "Origem", buttonStyle: CustomButtonStyle.Primary,
+                          ),
+                          CustomButton(
+                            onPressed: () async { Modular.to.pushNamed(Routes.LISTCURRENCY, arguments: "to");
+                            listCurrencyController.clearList(); listCurrencyController.getListCurrency(); },
+                            text: convertCurrencyController.to.currency != null?
+                                  convertCurrencyController.to.currency.toString():
+                                  "Destino", buttonStyle: CustomButtonStyle.Primary,
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  Consumer<ListCurrencyController>(
-                    builder: (context, listCurrencyController, widget) {
-                      return listCurrencyController.currencyList.length < 1?
-                      Center(child: CircularProgressIndicator()):
-                      SafeArea(
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(left: 10, right: 10),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(Radius.circular(8)),
-                                  border: Border.all(color: Theme.of(context).primaryColor, width: 3),
-                                ),
-                                height: MediaQuery.of(context).size.height /1.5,
-                                child: ListView.separated(
-                                  itemBuilder: (context, index) {
-                                    return Center(
-                                      child: Padding(
-                                        padding: EdgeInsets.all(10),
-                                        child: CurrencyCard(
-                                          onTap: () => listCurrencyController.setCardTaped(index),
-                                          currency: listCurrencyController.currencyList[index],
-                                        ),
-                                      )
-                                    );
-                                  },
-                                  separatorBuilder: (context, index) => Divider( height: 1, color: Colors.transparent,),
-                                  itemCount: listCurrencyController.currencyList.length
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

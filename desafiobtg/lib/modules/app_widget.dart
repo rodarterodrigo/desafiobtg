@@ -1,3 +1,4 @@
+import 'package:desafiobtg/modules/convert/presenter/controllers/convert_currency_controller.dart';
 import 'package:desafiobtg/modules/convert/presenter/controllers/list_currency_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -9,6 +10,7 @@ class AppWidget extends StatelessWidget {
     return MultiProvider(
       providers:[
         ChangeNotifierProvider<ListCurrencyController>.value(value: ListCurrencyController()),
+        ChangeNotifierProvider<ConvertCurrencyController>.value(value: ConvertCurrencyController()),
       ],
       child:MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -17,19 +19,9 @@ class AppWidget extends StatelessWidget {
         theme: ThemeData(
           brightness: Brightness.light,
           primaryColor: Colors.teal,
+          accentColor: Colors.teal[200],
           visualDensity: VisualDensity.adaptivePlatformDensity,
-          // cardColor: Colors.teal,
-          accentColor: Color.fromRGBO(255, 173, 1, 1),
           errorColor: Color.fromRGBO(255, 77, 106, 1),
-        ),
-        darkTheme:  ThemeData(
-          primaryColor: Color.fromRGBO(29, 29, 36, 1),
-          accentColor: Color.fromRGBO(255, 173, 1, 1),
-          scaffoldBackgroundColor: Colors.teal,
-          cardColor: Color.fromRGBO(45, 45, 55, 1),
-          errorColor: Color.fromRGBO(255, 77, 106, 1),
-          brightness: Brightness.dark,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         themeMode: ThemeMode.light,
         initialRoute: Modular.initialRoute,
