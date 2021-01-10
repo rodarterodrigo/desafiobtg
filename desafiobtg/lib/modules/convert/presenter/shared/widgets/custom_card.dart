@@ -54,7 +54,7 @@ class _CurrencyCardState extends State<CurrencyCard> {
                   ],
                 ),
               ],
-            )
+            ),
         ),
       ),
     );

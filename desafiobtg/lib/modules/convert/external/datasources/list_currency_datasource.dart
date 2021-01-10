@@ -1,5 +1,3 @@
-import 'package:desafiobtg/modules/convert/domain/errors/errors.dart';
-import 'package:desafiobtg/modules/convert/external/constants/settings.dart';
 import 'package:desafiobtg/modules/convert/external/datasources/CurrencyDataSourceResponse.dart';
 import 'package:desafiobtg/modules/convert/infra/datasources/list_currency_datasource.dart';
 import 'package:desafiobtg/modules/convert/infra/models/currency_model.dart';

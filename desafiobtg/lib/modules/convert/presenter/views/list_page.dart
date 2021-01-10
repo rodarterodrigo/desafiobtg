@@ -4,6 +4,7 @@ import 'package:desafiobtg/modules/convert/presenter/shared/enums/buttom_style.d
 import 'package:desafiobtg/modules/convert/presenter/shared/widgets/custom_buttom.dart';
 import 'package:desafiobtg/modules/convert/presenter/shared/widgets/custom_card.dart';
 import 'package:desafiobtg/modules/convert/presenter/shared/widgets/custom_textfield.dart';
+import 'package:desafiobtg/modules/convert/presenter/shared/widgets/custom_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -36,28 +37,40 @@ class _ListPageState extends State<ListPage> {
                 children: [
                   Padding(
                     padding: EdgeInsets.all(8),
-                    child: CustomTextField(
-                      clearTap: () => listCurrencyController.clear(searchController),
-                      controller: searchController,
-                      onChanged: (search) => listCurrencyController.searchCurrency(search),
-                      borderColor: Colors.teal,
-                      labelText: "Buscar por sigla",
+                    child: Card(
+                      elevation: 10,
+                      color: Colors.teal[100],
+                      child: Container(
+                        child: CustomTextField(
+                          clearTap: () => listCurrencyController.clear(searchController),
+                          controller: searchController,
+                          onChanged: (search) => listCurrencyController.searchCurrency(search),
+                          borderColor: Colors.teal,
+                          labelText: "Buscar por sigla",
+                        ),
+                      ),
                     ),
                   ),
                    Consumer<ListCurrencyController>(
                       builder: (context, listCurrencyController, widget) {
-                          return listCurrencyController.currencyList.length < 1?
-                          Center(child: CircularProgressIndicator()):
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Card(
-                              color: Colors.teal[100],
-                              elevation: 10,
-                              child: Column(
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.only(left: 8, right: 8),
-                                  child: Container(
+                          if(listCurrencyController.failureCurrency != '') {
+                            CustomFlutterToast.alert(listCurrencyController.failureCurrency);
+                            listCurrencyController.failureCurrency = '';
+                          }
+                            return listCurrencyController.currencyList.length < 1?
+                            Container(
+                                height: MediaQuery.of(context).size.height /1.7,
+                                child: Center(child: CircularProgressIndicator())):
+                            Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Card(
+                                    color: Colors.teal[100],
+                                    elevation: 10,
+                                    child: Column(
+                                        children: [
+                                    Padding(
+                                    padding: EdgeInsets.only(left: 8, right: 8),
+                                    child: Container(
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.all(Radius.circular(8)),
                                     ),
@@ -107,12 +120,15 @@ class _ListPageState extends State<ListPage> {
                                 ),
                                 CustomButton(
                                   onPressed: () {
-                                    widget.target == "from"? convertCurrencyController.from = listCurrencyController.selectedCurrency:
-                                                             convertCurrencyController.to = listCurrencyController.selectedCurrency;
-
-                                    print(convertCurrencyController.from);
-                                    print(convertCurrencyController.to);
-                                    listCurrencyController.backToHome();
+                                    if(widget.target == "from"){
+                                      listCurrencyController.selectedCurrency == null?
+                                      CustomFlutterToast.alert("Selecione a moeda de origem"): convertCurrencyController.from = listCurrencyController.selectedCurrency;
+                                    }
+                                    if(widget.target == "to"){
+                                      listCurrencyController.selectedCurrency == null?
+                                      CustomFlutterToast.alert("Selecione a moeda de destino"): convertCurrencyController.to = listCurrencyController.selectedCurrency;
+                                    }
+                                    if(listCurrencyController.selectedCurrency != null) listCurrencyController.backToHome();
                                   },
                                   text: "Confirmar", buttonStyle: CustomButtonStyle.Primary,
                                 ),

@@ -1,5 +1,6 @@
 import 'package:desafiobtg/modules/convert/domain/entities/currency.dart';
 import 'package:desafiobtg/modules/convert/domain/usecases/list_currency.dart';
+import 'package:desafiobtg/modules/convert/presenter/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -51,5 +52,20 @@ class ListCurrencyController extends ChangeNotifier{
 
   backToHome(){
     Modular.to.pop();
+  }
+
+  Future getOriginCurrency() async{
+    selectedCurrency = null;
+    await targetNavigation("from");
+  }
+
+  Future getDestinyCurrency() async{
+    selectedCurrency = null;
+    await targetNavigation("to");
+  }
+
+  Future targetNavigation(String target)async {
+    clearList(); await getListCurrency();
+    Modular.to.pushNamed(Routes.LISTCURRENCY, arguments: target);
   }
 }
