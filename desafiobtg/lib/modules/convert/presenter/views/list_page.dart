@@ -70,33 +70,33 @@ class _ListPageState extends State<ListPage> {
                                     child: Column(
                                         children: [
                                     Padding(
-                                    padding: EdgeInsets.only(left: 8, right: 8),
-                                    child: Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.all(Radius.circular(8)),
-                                    ),
-                                    height: MediaQuery.of(context).size.height /1.7,
-                                    child: ListView.separated(
-                                        itemBuilder: (context, index) {
-                                          return Center(
-                                              child: Padding(
-                                                padding: EdgeInsets.all(8),
-                                                child: CurrencyCard(
-                                                  onTap: () => listCurrencyController.setCardTaped(index),
-                                                  currency: listCurrencyController.currencyList[index],
-                                                ),
-                                              )
-                                          );
-                                        },
-                                        separatorBuilder: (context, index) => Divider( height: 1, color: Colors.transparent,),
-                                        itemCount: listCurrencyController.currencyList.length
+                                      padding: EdgeInsets.only(left: 8, right: 8),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.all(Radius.circular(8)),
+                                        ),
+                                        height: MediaQuery.of(context).size.height /1.7,
+                                        child: ListView.separated(
+                                            itemBuilder: (context, index) {
+                                              return Center(
+                                                  child: Padding(
+                                                    padding: EdgeInsets.all(8),
+                                                    child: CurrencyCard(
+                                                      onTap: () => listCurrencyController.setCardTaped(index),
+                                                      currency: listCurrencyController.currencyList[index],
+                                                    ),
+                                                  )
+                                              );
+                                            },
+                                            separatorBuilder: (context, index) => Divider( height: 1, color: Colors.transparent,),
+                                            itemCount: listCurrencyController.currencyList.length
+                                        ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
-                            );
+                          );
                         },
                       ),
                   Padding(

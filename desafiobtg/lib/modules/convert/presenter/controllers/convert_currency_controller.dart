@@ -33,7 +33,7 @@ class ConvertCurrencyController extends ChangeNotifier{
   set convertValue(value) { _convertValue = value; notifyListeners(); }
 
   Future getCurrencyConvert() async => await usecase.convertCurrency(this.from, this.to).then((value) => value.fold((l) => failureConvert = l.message, (r) => convert = r));
-  double getConvertValue(double value, double from, double to) => ((value / to) * from);
+  double getConvertValue(double value, double from, double to) => ((value / from) * to);
 
   Future<double> getConvert(TextEditingController value) async {
     isLoading = true;
@@ -55,5 +55,15 @@ class ConvertCurrencyController extends ChangeNotifier{
 
   clear(TextEditingController textEditingController){
     textEditingController.text = "";
+  }
+
+  clearCurrencyConvertion(){
+    isLoading = true;
+    convert = new Convert();
+    from = new Currency();
+    to = new Currency();
+    convertValue = 0.0;
+    isLoading = false;
+    notifyListeners();
   }
 }
