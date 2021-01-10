@@ -1,4 +1,3 @@
-
 import 'package:desafiobtg/modules/convert/domain/entities/currency.dart';
 import 'package:desafiobtg/modules/convert/presenter/controllers/convert_currency_controller.dart';
 import 'package:desafiobtg/modules/convert/presenter/controllers/list_currency_controller.dart';
@@ -34,37 +33,48 @@ class _HomeState extends State<Home> {
             title: Text("Currency Convert"),
             centerTitle: true,
           ),
-          body: SingleChildScrollView(
-            child: Center(
-              child: Container(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          CustomButton(
-                            onPressed: () async { Modular.to.pushNamed(Routes.LISTCURRENCY, arguments: "from");
-                            listCurrencyController.clearList(); listCurrencyController.getListCurrency(); },
-                            text: convertCurrencyController.from.currency != null?
-                                  convertCurrencyController.from.currency.toString():
-                                  "Origem", buttonStyle: CustomButtonStyle.Primary,
-                          ),
-                          CustomButton(
-                            onPressed: () async { Modular.to.pushNamed(Routes.LISTCURRENCY, arguments: "to");
-                            listCurrencyController.clearList(); listCurrencyController.getListCurrency(); },
-                            text: convertCurrencyController.to.currency != null?
-                                  convertCurrencyController.to.currency.toString():
-                                  "Destino", buttonStyle: CustomButtonStyle.Primary,
-                          ),
-                        ],
-                      ),
+          body: Center(
+            child: Container(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Center(
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.all(8),
+                          child: Text(convertCurrencyController.convertValue.toString(), style: TextStyle(fontSize: 24),),
+                        ),
+
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            CustomButton(
+                              onPressed: () async { Modular.to.pushNamed(Routes.LISTCURRENCY, arguments: "from");
+                              listCurrencyController.clearList(); listCurrencyController.getListCurrency(); },
+                              text: convertCurrencyController.from.currency != null?
+                                    convertCurrencyController.from.currency.toString():
+                                    "Origem", buttonStyle: CustomButtonStyle.Primary,
+                            ),
+                            CustomButton(
+                              onPressed: () async { Modular.to.pushNamed(Routes.LISTCURRENCY, arguments: "to");
+                              listCurrencyController.clearList(); listCurrencyController.getListCurrency(); },
+                              text: convertCurrencyController.to.currency != null?
+                                    convertCurrencyController.to.currency.toString():
+                                    "Destino", buttonStyle: CustomButtonStyle.Primary,
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                  CustomButton(
+                    onPressed: () async { convertCurrencyController.getConvert(); },
+                    text: "Converter", buttonStyle: CustomButtonStyle.Primary,
+                  ),
+                ],
               ),
             ),
           ),

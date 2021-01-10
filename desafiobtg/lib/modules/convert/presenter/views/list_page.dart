@@ -44,17 +44,16 @@ class _ListPageState extends State<ListPage> {
                       labelText: "Buscar por sigla",
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Card(
-                      color: Colors.teal[100],
-                      elevation: 10,
-                      child: Consumer<ListCurrencyController>(
-                        builder: (context, listCurrencyController, widget) {
+                   Consumer<ListCurrencyController>(
+                      builder: (context, listCurrencyController, widget) {
                           return listCurrencyController.currencyList.length < 1?
                           Center(child: CircularProgressIndicator()):
-                          SafeArea(
-                            child: Column(
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Card(
+                              color: Colors.teal[100],
+                              elevation: 10,
+                              child: Column(
                               children: [
                                 Padding(
                                   padding: EdgeInsets.only(left: 8, right: 8),
@@ -62,7 +61,7 @@ class _ListPageState extends State<ListPage> {
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.all(Radius.circular(8)),
                                     ),
-                                    height: MediaQuery.of(context).size.height /1.6,
+                                    height: MediaQuery.of(context).size.height /1.7,
                                     child: ListView.separated(
                                         itemBuilder: (context, index) {
                                           return Center(
@@ -82,11 +81,10 @@ class _ListPageState extends State<ListPage> {
                                 ),
                               ],
                             ),
-                          );
+                          ),
+                            );
                         },
                       ),
-                    ),
-                  ),
                   Padding(
                     padding: EdgeInsets.all(8),
                     child: Card(

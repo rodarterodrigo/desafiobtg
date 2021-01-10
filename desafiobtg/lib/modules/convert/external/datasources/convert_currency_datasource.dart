@@ -12,7 +12,7 @@ class ConvertCurrencyDatasource implements IConvertCurrencyDataSource{
 
   @override
   Future<ConvertModel> convertCurrency(Currency from, Currency to) async{
-    final response = await dio.get("${Settings.baseUrlPrefix}/list?access_key=${Settings.ApiKey}&currencies=${from.currency},${to.currency}");
-    return response.statusCode == 200? ConvertModel.toConvert(response.data['quotes'] as Map): throw DataSourceError();
+    final response = await dio.get("${Settings.baseUrlPrefix}/live?access_key=${Settings.ApiKey}&currencies=${from.currency},${to.currency}&source=USD&format=1");
+    return response.statusCode == 200.0? ConvertModel.toConvert(response.data['quotes'] as Map): throw DataSourceError();
   }
 }

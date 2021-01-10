@@ -32,7 +32,7 @@ class AppModule extends MainModule{
   @override
   // TODO: implement routers
   List<ModularRouter> get routers => [
-    ModularRouter(Routes.HOME, child: (context, args) => Home(), transition: TransitionType.leftToRight),
-    ModularRouter(Routes.LISTCURRENCY, child: (context, args) => ListPage(target: args.data,), transition: TransitionType.rightToLeft),
+    ModularRouter(Routes.HOME, child: (context, args) => Home(), transition: TransitionType.leftToRight, duration: Duration(milliseconds: 500)),
+    ModularRouter(Routes.LISTCURRENCY, child: (context, args) => ListPage(target: args.data,), transition: TransitionType.rightToLeft, duration: Duration(milliseconds: 500)),
   ];
 }

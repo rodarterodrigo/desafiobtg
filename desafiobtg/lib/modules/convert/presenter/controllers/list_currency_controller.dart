@@ -1,7 +1,5 @@
 import 'package:desafiobtg/modules/convert/domain/entities/currency.dart';
 import 'package:desafiobtg/modules/convert/domain/usecases/list_currency.dart';
-import 'package:desafiobtg/modules/convert/presenter/controllers/convert_currency_controller.dart';
-import 'package:desafiobtg/modules/convert/presenter/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -13,7 +11,7 @@ class ListCurrencyController extends ChangeNotifier{
 
   String _failureCurrency = "";
   get failureCurrency => _failureCurrency;
-  set failureCurrency(value) { _failureCurrency = value; notifyListeners();}
+  set failureCurrency(value) { _failureCurrency = value; notifyListeners(); }
 
   Currency _selectedCurrency = new Currency();
   get selectedCurrency => _selectedCurrency;
