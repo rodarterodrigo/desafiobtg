@@ -1,13 +1,10 @@
 import 'package:desafiobtg/modules/convert/domain/entities/currency.dart';
 import 'package:desafiobtg/modules/convert/presenter/controllers/convert_currency_controller.dart';
 import 'package:desafiobtg/modules/convert/presenter/controllers/list_currency_controller.dart';
-import 'package:desafiobtg/modules/convert/presenter/routes/app_routes.dart';
 import 'package:desafiobtg/modules/convert/presenter/shared/enums/buttom_style.dart';
 import 'package:desafiobtg/modules/convert/presenter/shared/widgets/custom_buttom.dart';
 import 'package:desafiobtg/modules/convert/presenter/shared/widgets/custom_textfield.dart';
-import 'package:desafiobtg/modules/convert/presenter/shared/widgets/custom_toast.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:provider/provider.dart';
 
 
@@ -73,6 +70,7 @@ class _HomeState extends State<Home> {
                             controller: valueController,
                             onChanged: (search) => listCurrencyController.searchCurrency(search),
                             borderColor: Colors.teal,
+                            keyboardType: TextInputType.number,
                             labelText: "Digite o valor",
                           ),
                         ),

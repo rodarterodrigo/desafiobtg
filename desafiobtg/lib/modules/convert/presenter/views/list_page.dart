@@ -42,6 +42,7 @@ class _ListPageState extends State<ListPage> {
                       color: Colors.teal[100],
                       child: Container(
                         child: CustomTextField(
+                          keyboardType: TextInputType.text,
                           clearTap: () => listCurrencyController.clear(searchController),
                           controller: searchController,
                           onChanged: (search) => listCurrencyController.searchCurrency(search),
@@ -119,17 +120,7 @@ class _ListPageState extends State<ListPage> {
                                   text: "Voltar", buttonStyle: CustomButtonStyle.Secondary,
                                 ),
                                 CustomButton(
-                                  onPressed: () {
-                                    if(widget.target == "from"){
-                                      listCurrencyController.selectedCurrency == null?
-                                      CustomFlutterToast.alert("Selecione a moeda de origem"): convertCurrencyController.from = listCurrencyController.selectedCurrency;
-                                    }
-                                    if(widget.target == "to"){
-                                      listCurrencyController.selectedCurrency == null?
-                                      CustomFlutterToast.alert("Selecione a moeda de destino"): convertCurrencyController.to = listCurrencyController.selectedCurrency;
-                                    }
-                                    if(listCurrencyController.selectedCurrency != null) listCurrencyController.backToHome();
-                                  },
+                                  onPressed: () => listCurrencyController.confirmSelectedCurrency(widget.target, convertCurrencyController),
                                   text: "Confirmar", buttonStyle: CustomButtonStyle.Primary,
                                 ),
                               ],

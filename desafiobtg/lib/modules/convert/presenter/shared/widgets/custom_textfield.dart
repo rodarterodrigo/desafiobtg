@@ -13,7 +13,7 @@ class CustomTextField extends StatelessWidget {
     this.isEnabled = true,
     this.prefixIcon,
     this.borderColor,
-    this.keyboardType = TextInputType.text,
+    this.keyboardType,
     this.controller,
     this.helperText,
     this.clearTap,

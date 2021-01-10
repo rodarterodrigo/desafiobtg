@@ -1,6 +1,8 @@
 import 'package:desafiobtg/modules/convert/domain/entities/currency.dart';
 import 'package:desafiobtg/modules/convert/domain/usecases/list_currency.dart';
+import 'package:desafiobtg/modules/convert/presenter/controllers/convert_currency_controller.dart';
 import 'package:desafiobtg/modules/convert/presenter/routes/app_routes.dart';
+import 'package:desafiobtg/modules/convert/presenter/shared/widgets/custom_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -67,5 +69,17 @@ class ListCurrencyController extends ChangeNotifier{
   Future targetNavigation(String target)async {
     clearList(); await getListCurrency();
     Modular.to.pushNamed(Routes.LISTCURRENCY, arguments: target);
+  }
+
+  confirmSelectedCurrency(String target, ConvertCurrencyController convertCurrencyController){
+    if(target == "from"){
+      selectedCurrency == null?
+      CustomFlutterToast.alert("Selecione a moeda de origem"): convertCurrencyController.from = selectedCurrency;
+    }
+    if(target == "to"){
+      selectedCurrency == null?
+      CustomFlutterToast.alert("Selecione a moeda de destino"): convertCurrencyController.to = selectedCurrency;
+    }
+    if(selectedCurrency != null) backToHome();
   }
 }
