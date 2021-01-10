@@ -34,8 +34,8 @@ class _HomeState extends State<Home> {
           body: Center(
             child: SingleChildScrollView(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -111,42 +111,47 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                   ),
-                  Card(
-                    elevation: 10,
-                    child: Container(
-                      height: MediaQuery.of(context).size.height/3.3,
-                      width: MediaQuery.of(context).size.width/1.07,
-                      child: Column(
-                        children: [
-                          AnimatedOpacity(
-                            opacity: convertCurrencyController.from.currency.toString() == "null"? 0: 1,
-                            duration: Duration(milliseconds: 400),
-                            child: Center(
-                              child: Text(
-                                convertCurrencyController.from.currency.toString() == "null"? "":
-                                convertCurrencyController.from.currency.toString(),
-                                style: TextStyle(
-                                    fontSize: 50
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Card(
+                      elevation: 10,
+                      child: Container(
+                        height: 200,
+                        width: MediaQuery.of(context).size.width/1.07,
+                        child: Column(
+                          children: [
+                            AnimatedOpacity(
+                              opacity: convertCurrencyController.from.currency.toString() == "null"? 0: 1,
+                              duration: Duration(milliseconds: 400),
+                              child: Center(
+                                child: Text(
+                                  convertCurrencyController.from.currency.toString() == "null"? "":
+                                  convertCurrencyController.from.currency.toString(),
+                                  style: TextStyle(
+                                      fontSize: 50,
+                                    color: Colors.teal,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          if(convertCurrencyController.from.currency.toString() != "null")Icon(Icons.arrow_downward, size: MediaQuery.of(context).size.height/10,),
-                          AnimatedOpacity(
-                            opacity: convertCurrencyController.to.currency.toString() == "null"? 0: 1,
-                            duration: Duration(milliseconds: 400),
-                            child: Center(
-                              child: Text(
-                                convertCurrencyController.to.currency.toString() == "null"? "":
-                                convertCurrencyController.to.currency.toString(),
-                                style: TextStyle(
-                                    fontSize: 50
+                            if(convertCurrencyController.from.currency.toString() != "null")Icon(Icons.arrow_downward, size: MediaQuery.of(context).size.height/10,),
+                            AnimatedOpacity(
+                              opacity: convertCurrencyController.to.currency.toString() == "null"? 0: 1,
+                              duration: Duration(milliseconds: 400),
+                              child: Center(
+                                child: Text(
+                                  convertCurrencyController.to.currency.toString() == "null"? "":
+                                  convertCurrencyController.to.currency.toString(),
+                                  style: TextStyle(
+                                      fontSize: 50,
+                                    color: Colors.teal,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
-                      )
+                          ],
+                        )
+                      ),
                     ),
                   ),
                   Column(
@@ -189,7 +194,7 @@ class _HomeState extends State<Home> {
                                   Padding(
                                     padding: const EdgeInsets.only(top: 8.0),
                                     child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                      mainAxisAlignment: MainAxisAlignment.center,
                                       crossAxisAlignment: CrossAxisAlignment.stretch,
                                       children: [
                                         Container(

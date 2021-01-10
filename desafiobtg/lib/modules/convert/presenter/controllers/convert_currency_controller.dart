@@ -39,7 +39,7 @@ class ConvertCurrencyController extends ChangeNotifier{
     isLoading = true;
     convertValue = 0.0;
     await getCurrencyConvert();
-    convertValue = getConvertValue(double.parse(value.text), convert.from, convert.to);
+    convert.from.toString() == "null"? isLoading = false: convertValue = getConvertValue(double.parse(value.text), convert.from, convert.to);
     isLoading = false;
   }
 
