@@ -32,6 +32,7 @@ class ListCurrencyController extends ChangeNotifier{
       this.selectedCurrency = this.currencyList[0];
       notifyListeners();
     }else{
+      this.selectedCurrency = null;
       this.currencyList.clear();
       this.getListCurrency();
     }
