@@ -1,6 +1,7 @@
 import 'package:desafiobtg/modules/convert/domain/entities/convert.dart';
 import 'package:desafiobtg/modules/convert/domain/entities/currency.dart';
 import 'package:desafiobtg/modules/convert/domain/usecases/convert_currency.dart';
+import 'package:desafiobtg/modules/convert/presenter/helpers/verify_connection_helper.dart';
 import 'package:desafiobtg/modules/convert/presenter/shared/widgets/custom_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -43,27 +44,29 @@ class ConvertCurrencyController extends ChangeNotifier{
     isLoading = false;
   }
 
-  commitConvert(TextEditingController valueController){
-    if(from.currency == null || to.currency == null)
-      CustomFlutterToast.alert("Selecione as moedas para conversão");
-    else
-    if(valueController.text == '')
-      CustomFlutterToast.alert("Digite um valor para a conversão");
-    else
-      getConvert(valueController);
+  commitConvert(TextEditingController valueController) async {
+    if(await VerifyConnection.verifyConnection() == true) {
+      if (from.currency == null || to.currency == null)
+        CustomFlutterToast.alert("Selecione as moedas para conversão");
+      else if (valueController.text == '')
+        CustomFlutterToast.alert("Digite um valor para a conversão");
+      else
+        getConvert(valueController);
+    }
   }
 
   clear(TextEditingController textEditingController){
     textEditingController.text = "";
   }
 
-  clearCurrencyConvertion(){
+  clearCurrencyConvertion(TextEditingController valueController){
     isLoading = true;
     convert = new Convert();
     from = new Currency();
     to = new Currency();
     convertValue = 0.0;
     isLoading = false;
+    valueController.text = "";
     notifyListeners();
   }
 }

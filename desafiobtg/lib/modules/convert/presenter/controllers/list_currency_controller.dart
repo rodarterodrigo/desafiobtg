@@ -1,6 +1,7 @@
 import 'package:desafiobtg/modules/convert/domain/entities/currency.dart';
 import 'package:desafiobtg/modules/convert/domain/usecases/list_currency.dart';
 import 'package:desafiobtg/modules/convert/presenter/controllers/convert_currency_controller.dart';
+import 'package:desafiobtg/modules/convert/presenter/helpers/verify_connection_helper.dart';
 import 'package:desafiobtg/modules/convert/presenter/routes/app_routes.dart';
 import 'package:desafiobtg/modules/convert/presenter/shared/widgets/custom_toast.dart';
 import 'package:flutter/material.dart';
@@ -57,13 +58,17 @@ class ListCurrencyController extends ChangeNotifier{
   }
 
   Future getOriginCurrency() async{
-    selectedCurrency = null;
-    await targetNavigation("from");
+    if(await VerifyConnection.verifyConnection() == true) {
+      selectedCurrency = null;
+      await targetNavigation("from");
+    }
   }
 
   Future getDestinyCurrency() async{
-    selectedCurrency = null;
-    await targetNavigation("to");
+    if(await VerifyConnection.verifyConnection() == true){
+      selectedCurrency = null;
+      await targetNavigation("to");
+    }
   }
 
   Future targetNavigation(String target)async {
