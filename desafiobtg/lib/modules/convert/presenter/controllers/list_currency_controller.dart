@@ -7,85 +7,108 @@ import 'package:desafiobtg/modules/convert/presenter/shared/widgets/custom_toast
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-class ListCurrencyController extends ChangeNotifier{
-
-  List<Currency> _currencyList= new List<Currency>();
+class ListCurrencyController extends ChangeNotifier {
+  List<Currency> _currencyList = <Currency>[];
   get currencyList => _currencyList;
-  set currencyList(value) { _currencyList = value; notifyListeners(); }
+  set currencyList(value) {
+    _currencyList = value;
+    notifyListeners();
+  }
 
   String _failureCurrency = "";
   get failureCurrency => _failureCurrency;
-  set failureCurrency(value) { _failureCurrency = value; notifyListeners(); }
+  set failureCurrency(value) {
+    _failureCurrency = value;
+    notifyListeners();
+  }
 
   Currency _selectedCurrency = new Currency();
   get selectedCurrency => _selectedCurrency;
-  set selectedCurrency(value) { _selectedCurrency = value; }
+  set selectedCurrency(value) {
+    _selectedCurrency = value;
+  }
 
   final ListCurrency usecase = Modular.get<ListCurrency>();
 
-  Future getListCurrency() async { if(currencyList.length < 1) await usecase.listCurrency().then((value) => value.fold((l) => failureCurrency = l.message, (r) => currencyList = r));}
+  Future getListCurrency() async {
+    if (currencyList.length < 1)
+      await usecase.listCurrency().then((value) => value.fold(
+          (l) => failureCurrency = l.message, (r) => currencyList = r));
+  }
 
   setCardTaped(int index) async {
-    if(!this.currencyList[index].isTaped) {
+    if (!this.currencyList[index].isTaped) {
       this.currencyList[index].isTaped = true;
-      this.currencyList = this._currencyList.where((element) => element.currency == this.currencyList[index].currency).toList();
+      this.currencyList = this
+          ._currencyList
+          .where((element) =>
+              element.currency == this.currencyList[index].currency)
+          .toList();
       this.selectedCurrency = this.currencyList[0];
       notifyListeners();
-    }else{
+    } else {
       this.selectedCurrency = null;
       this.currencyList.clear();
       this.getListCurrency();
     }
   }
 
-  clear(TextEditingController textEditingController){
+  clear(TextEditingController textEditingController) {
     textEditingController.text = "";
     this.currencyList.clear();
     notifyListeners();
   }
 
-  clearList(){
+  clearList() {
     this.currencyList.clear();
   }
 
   searchCurrency(String search) async {
     this.currencyList.clear();
     await this.getListCurrency();
-    if(currencyList.length > 1) this.currencyList = this._currencyList.where((element) => element.currency.startsWith(search.toUpperCase())).toList();
+    if (currencyList.length > 1)
+      this.currencyList = this
+          ._currencyList
+          .where((element) => element.currency.startsWith(search.toUpperCase()))
+          .toList();
   }
 
-  backToHome(){
+  backToHome() {
     Modular.to.pop();
   }
 
-  Future getOriginCurrency() async{
-    if(await VerifyConnection.verifyConnection() == true) {
+  Future getOriginCurrency() async {
+    if (await VerifyConnection.verifyConnection() == true) {
       selectedCurrency = null;
       await targetNavigation("from");
     }
   }
 
-  Future getDestinyCurrency() async{
-    if(await VerifyConnection.verifyConnection() == true){
+  Future getDestinyCurrency() async {
+    if (await VerifyConnection.verifyConnection() == true) {
       selectedCurrency = null;
       await targetNavigation("to");
     }
   }
 
-  Future targetNavigation(String target)async {
-    clearList(); await getListCurrency();
+  Future targetNavigation(String target) async {
+    clearList();
+    await getListCurrency();
     Modular.to.pushNamed(Routes.LISTCURRENCY, arguments: target);
   }
 
-  confirmSelectedCurrency(String target, ConvertCurrencyController convertCurrencyController){
-    if(target == "from"){
-      selectedCurrency == null?
-      CustomFlutterToast.alert("Selecione a moeda de origem"): convertCurrencyController.from = selectedCurrency;
+  confirmSelectedCurrency(
+      String target, ConvertCurrencyController convertCurrencyController) {
+    if (target == "from") {
+      selectedCurrency == null
+          ? CustomFlutterToast.alert("Selecione a moeda de origem")
+          : convertCurrencyController.from = selectedCurrency;
     }
-    if(target == "to"){
-      selectedCurrency == null?
-      CustomFlutterToast.alert("Selecione a moeda de destino"): convertCurrencyController.to = selectedCurrency;
+    if (target == "to") {
+      selectedCurrency == null
+          ? CustomFlutterToast.alert("Selecione a moeda de destino")
+          : convertCurrencyController.to = selectedCurrency;
     }
-    if(selectedCurrency != null) backToHome();
+    if (selectedCurrency != null) backToHome();
   }
 }

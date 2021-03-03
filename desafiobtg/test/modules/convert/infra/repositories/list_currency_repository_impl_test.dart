@@ -7,21 +7,23 @@ import 'package:desafiobtg/modules/convert/infra/repositories/list_currency_repo
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-class ListCurrencyDataSourceMock extends Mock implements IListCurrencyDataSource{}
+class ListCurrencyDataSourceMock extends Mock
+    implements IListCurrencyDataSource {}
 
 final datasource = ListCurrencyDataSourceMock();
 final repository = ListCurrencyRepository(datasource);
 
-main(){
-  test("Deve retornar uma lista de moedas e seus nomes", () async{
-    when(datasource.listCurrency()).thenAnswer((realInvocation) async => List<CurrencyModel>());
+main() {
+  test("Deve retornar uma lista de moedas e seus nomes", () async {
+    when(datasource.listCurrency())
+        .thenAnswer((realInvocation) async => <CurrencyModel>[]);
     final result = await repository.listCurrency();
     expect(result | null, isA<List<Currency>>());
   });
 
-  test("Deve retornar uma exceção do tipo DataSourceError", () async{
+  test("Deve retornar uma exceção do tipo DataSourceError", () async {
     when(datasource.listCurrency()).thenThrow(DataSourceError());
     final result = await repository.listCurrency();
-    expect(result.fold(id,id), isA<DataSourceError>());
+    expect(result.fold(id, id), isA<DataSourceError>());
   });
 }
