@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:desafiobtg/modules/convert/domain/entities/currency.dart';
-import 'package:desafiobtg/modules/convert/domain/errors/errors.dart';
+import 'package:desafiobtg/modules/convert/domain/errors/failures.dart';
 import 'package:desafiobtg/modules/convert/domain/repositories/list_currency_repository.dart';
 import 'package:desafiobtg/modules/convert/infra/datasources/list_currency_datasource.dart';
 
-class ListCurrencyRepository implements IListCurrencyRepository{
+class ListCurrencyRepositoryImplementation implements IListCurrencyRepository{
   final IListCurrencyDataSource dataSource;
 
   ListCurrencyRepository(this.dataSource);

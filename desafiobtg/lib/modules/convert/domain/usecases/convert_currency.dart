@@ -1,27 +1,16 @@
-import 'package:dartz/dartz.dart';
-import 'package:desafiobtg/modules/convert/domain/entities/convert.dart';
-import 'package:desafiobtg/modules/convert/domain/entities/currency.dart';
-import 'package:desafiobtg/modules/convert/domain/errors/errors.dart';
-import 'package:desafiobtg/modules/convert/domain/repositories/convert_currency_repository.dart';
+import 'package:desafiobtg/modules/shared/domain/entities/general_response.dart';
+import '../entities/currency.dart';
+import '../repositories/convert_currency_repository.dart';
 
-abstract class IConvertCurrency{
-  Future<Either<FailureCurrency, Convert>>convertCurrency(Currency from, Currency to);
+abstract class ConvertCurrencyAbstraction{
+  Future<GeneralResult>call(Currency from, Currency to);
 }
 
-class ConvertCurrency implements IConvertCurrency{
-  final IConvertCurrencyRepository repository;
+class ConvertCurrency implements ConvertCurrencyAbstraction{
+  final ConvertCurrencyRepository repository;
 
-  ConvertCurrency(this.repository):assert(repository != null);
+  const ConvertCurrency(this.repository);
 
   @override
-  Future<Either<FailureCurrency, Convert>> convertCurrency(Currency from, Currency to) async{
-    try {
-      return from == null? Left(ConvertError(message: "Moeda de origem não pode ser nula.")): to == null?
-                           Left(ConvertError(message: "Moeda de destino não pode ser nula.")):
-                           await repository.convertCurrency(from, to);
-    }
-    catch(e){
-      return Left(ConvertError(message: e.toString()));
-    }
-  }
+  Future<GeneralResult> call(Currency from, Currency to) => repository.convertCurrency(from, to);
 }

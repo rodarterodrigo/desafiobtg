@@ -1,4 +1,4 @@
-import 'package:desafiobtg/modules/convert/domain/errors/errors.dart';
+import 'package:desafiobtg/modules/convert/domain/errors/failures.dart';
 import 'package:desafiobtg/modules/convert/external/datasources/list_currency_datasource.dart';
 import 'package:desafiobtg/modules/convert/infra/models/currency_model.dart';
 import 'package:dio/dio.dart';

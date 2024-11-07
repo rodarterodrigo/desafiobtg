@@ -1,11 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:desafiobtg/modules/convert/domain/entities/convert.dart';
 import 'package:desafiobtg/modules/convert/domain/entities/currency.dart';
-import 'package:desafiobtg/modules/convert/domain/errors/errors.dart';
+import 'package:desafiobtg/modules/convert/domain/errors/failures.dart';
 import 'package:desafiobtg/modules/convert/domain/repositories/convert_currency_repository.dart';
 import 'package:desafiobtg/modules/convert/infra/datasources/convert_currency_datasource.dart';
 
-class ConvertCurrencyRepository implements IConvertCurrencyRepository{
+class ConvertCurrencyRepositoryImplementation implements IConvertCurrencyRepository{
   final IConvertCurrencyDataSource dataSource;
 
   ConvertCurrencyRepository(this.dataSource);

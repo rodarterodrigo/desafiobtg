@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:desafiobtg/modules/convert/domain/entities/currency.dart';
-import 'package:desafiobtg/modules/convert/domain/errors/errors.dart';
+import 'package:desafiobtg/modules/convert/domain/errors/failures.dart';
 import 'package:desafiobtg/modules/convert/infra/datasources/list_currency_datasource.dart';
 import 'package:desafiobtg/modules/convert/infra/models/currency_model.dart';
 import 'package:desafiobtg/modules/convert/infra/repositories/list_currency_repository_impl.dart';

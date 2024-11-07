@@ -1,8 +1,6 @@
-import 'package:dartz/dartz.dart';
-import 'package:desafiobtg/modules/convert/domain/entities/convert.dart';
 import 'package:desafiobtg/modules/convert/domain/entities/currency.dart';
-import 'package:desafiobtg/modules/convert/domain/errors/errors.dart';
+import 'package:desafiobtg/modules/shared/domain/entities/general_response.dart';
 
-abstract class IConvertCurrencyRepository{
-  Future<Either<FailureCurrency, Convert>> convertCurrency(Currency from, Currency to);
+abstract class ConvertCurrencyRepository{
+  Future<GeneralResult> convertCurrency(Currency from, Currency to);
 }

@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:desafiobtg/modules/convert/domain/entities/convert.dart';
 import 'package:desafiobtg/modules/convert/domain/entities/currency.dart';
-import 'package:desafiobtg/modules/convert/domain/errors/errors.dart';
+import 'package:desafiobtg/modules/convert/domain/errors/failures.dart';
 import 'package:desafiobtg/modules/convert/infra/datasources/convert_currency_datasource.dart';
 import 'package:desafiobtg/modules/convert/infra/models/convert_model.dart';
 import 'package:desafiobtg/modules/convert/infra/repositories/convert_currency_repository_impl.dart';

@@ -1,24 +1,16 @@
-import 'package:dartz/dartz.dart';
-import 'package:desafiobtg/modules/convert/domain/entities/currency.dart';
-import 'package:desafiobtg/modules/convert/domain/errors/errors.dart';
-import 'package:desafiobtg/modules/convert/domain/repositories/list_currency_repository.dart';
+import 'package:desafiobtg/modules/shared/domain/entities/general_response.dart';
 
-abstract class IListCurrency{
-  Future<Either<FailureCurrency, List<Currency>>>listCurrency();
+import '../repositories/list_currency_repository.dart';
+
+abstract class ListCurrencyAbstraction{
+  Future<GeneralResult>listCurrency();
 }
 
-class ListCurrency implements IListCurrency{
-  final IListCurrencyRepository repository;
+class ListCurrency implements ListCurrencyAbstraction{
+  final ListCurrencyRepository repository;
 
-  ListCurrency(this.repository):assert(repository != null);
+  const ListCurrency(this.repository);
 
   @override
-  Future<Either<FailureCurrency, List<Currency>>> listCurrency() async {
-    try {
-      return await repository.listCurrency();
-    }
-    catch(e){
-      return Left(ListError(message: e.toString()));
-    }
-  }
+  Future<GeneralResult> listCurrency() async => await repository.listCurrency();
 }

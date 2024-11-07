@@ -1,28 +1,33 @@
-import 'package:desafiobtg/modules/convert/domain/entities/currency.dart';
-import 'package:desafiobtg/modules/convert/domain/errors/errors.dart';
+import 'package:desafiobtg/modules/convert/domain/entities/currencies.dart';
+import 'package:desafiobtg/modules/convert/domain/failures/failures.dart';
 import 'package:desafiobtg/modules/convert/domain/repositories/list_currency_repository.dart';
 import 'package:desafiobtg/modules/convert/domain/usecases/list_currency.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
-import 'package:dartz/dartz.dart';
+import 'package:mocktail/mocktail.dart';
 
 class ListCurrencyRepositoryMock extends Mock
-    implements IListCurrencyRepository {}
+    implements ListCurrencyRepository {}
+
+class CurrenciesFake extends Fake implements Currencies{}
 
 final repository = ListCurrencyRepositoryMock();
 final usecase = ListCurrency(repository);
 
 main() {
-  test("Deve retornar uma lista de moedas e seus nomes.", () async {
-    when(repository.listCurrency())
-        .thenAnswer((realInvocation) async => Right(<Currency>[]));
+  setUpAll((){
+    registerFallbackValue(CurrenciesFake());
+  });
+  test("Should return a currency list and your names.", () async {
+    when(() => repository.listCurrency())
+        .thenAnswer((realInvocation) async => CurrenciesFake());
     final result = await usecase.listCurrency();
-    expect(result | null, isA<List<Currency>>());
+    expect(result, isA<Currencies>());
   });
 
-  test("Deve retornar uma exceção do tipo ListError", () async {
-    when(repository.listCurrency()).thenThrow(ListError());
+  test("Should return a list currency failure", () async {
+    when(() => repository.listCurrency())
+        .thenAnswer((realInvocation) async => ListCurrencyFailure('ListCurrencyFailure'));
     final result = await usecase.listCurrency();
-    expect(result.fold(id, id), isA<ListError>());
+    expect(result, isA<ListCurrencyFailure>());
   });
 }
