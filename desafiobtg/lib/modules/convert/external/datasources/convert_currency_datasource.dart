@@ -5,14 +5,18 @@ import 'package:desafiobtg/modules/convert/infra/datasources/convert_currency_da
 import 'package:desafiobtg/modules/convert/infra/models/convert_model.dart';
 import 'package:dio/dio.dart';
 
-class ConvertCurrencyDatasource implements IConvertCurrencyDataSource{
+class ConvertCurrencyDatasourceImplementation
+    implements ConvertCurrencyDataSource {
   final Dio dio;
 
-  ConvertCurrencyDatasource(this.dio):assert(dio!= null);
+  const ConvertCurrencyDatasourceImplementation(this.dio) : assert(dio != null);
 
   @override
-  Future<ConvertModel> convertCurrency(Currency from, Currency to) async{
-    final response = await dio.get("${Settings.baseUrlPrefix}/live?access_key=${Settings.ApiKey}&currencies=${from.currency},${to.currency}&source=USD&format=1");
-    return response.statusCode == 200? ConvertModel.toConvert(response.data['quotes'] as Map): throw DataSourceError();
+  Future<ConvertModel> convertCurrency(Currency from, Currency to) async {
+    final response = await dio.get(
+        "${Settings.baseUrlPrefix}/live?access_key=${Settings.ApiKey}&currencies=${from.currency},${to.currency}&source=USD&format=1");
+    return response.statusCode == 200
+        ? ConvertModel.toConvert(response.data['quotes'] as Map)
+        : throw DataSourceError();
   }
 }

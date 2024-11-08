@@ -1,6 +1,6 @@
-import 'package:desafiobtg/modules/shared/domain/entities/general_response.dart';
+import 'package:desafiobtg/modules/shared/domain/failures/general_failures.dart';
 
-abstract class CurrencyFailures implements GeneralResult{
+abstract class CurrencyFailures implements GeneralFailures{
   final String message;
 
   const CurrencyFailures(this.message);
